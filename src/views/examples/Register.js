@@ -31,7 +31,8 @@ import {
   InputGroup,
   Container,
   Row,
-  Col
+  Col,
+  Label,
 } from "reactstrap";
 
 // core components
@@ -44,6 +45,26 @@ class Register extends React.Component {
     document.scrollingElement.scrollTop = 0;
     this.refs.main.scrollTop = 0;
   }
+
+  state = {
+    username: "",
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+    country: "",
+  };
+
+  handleSubmit = (event) => {
+    console.log(this.state);
+    event.preventDefault();
+  };
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
   render() {
     return (
       <>
@@ -66,44 +87,12 @@ class Register extends React.Component {
                   <Card className="bg-secondary shadow border-0">
                     <CardHeader className="bg-white pb-5">
                       <div className="text-muted text-center mb-3">
-                        <small>Sign up with</small>
+                        <h1>Sign up</h1>
                       </div>
-                      <div className="text-center">
-                        <Button
-                          className="btn-neutral btn-icon mr-4"
-                          color="default"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <span className="btn-inner--icon mr-1">
-                            <img
-                              alt="..."
-                              src={require("assets/img/icons/common/github.svg")}
-                            />
-                          </span>
-                          <span className="btn-inner--text">Github</span>
-                        </Button>
-                        <Button
-                          className="btn-neutral btn-icon ml-1"
-                          color="default"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <span className="btn-inner--icon mr-1">
-                            <img
-                              alt="..."
-                              src={require("assets/img/icons/common/google.svg")}
-                            />
-                          </span>
-                          <span className="btn-inner--text">Google</span>
-                        </Button>
-                      </div>
+                      <div className="text-center"></div>
                     </CardHeader>
                     <CardBody className="px-lg-5 py-lg-5">
-                      <div className="text-center text-muted mb-4">
-                        <small>Or sign up with credentials</small>
-                      </div>
-                      <Form role="form">
+                      <Form role="form" onSubmit={this.handleSubmit}>
                         <FormGroup>
                           <InputGroup className="input-group-alternative mb-3">
                             <InputGroupAddon addonType="prepend">
@@ -111,7 +100,48 @@ class Register extends React.Component {
                                 <i className="ni ni-hat-3" />
                               </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="Name" type="text" />
+                            <Input
+                              placeholder="First name"
+                              name="firstname"
+                              type="text"
+                              value={this.firstname}
+                              onChange={this.handleChange}
+                              required
+                            />
+                          </InputGroup>
+                        </FormGroup>
+                        <FormGroup>
+                          <InputGroup className="input-group-alternative mb-3">
+                            <InputGroupAddon addonType="prepend">
+                              <InputGroupText>
+                                <i className="ni ni-hat-3" />
+                              </InputGroupText>
+                            </InputGroupAddon>
+                            <Input
+                              placeholder="Last name"
+                              name="lastname"
+                              type="text"
+                              value={this.lastname}
+                              onChange={this.handleChange}
+                              required
+                            />
+                          </InputGroup>
+                        </FormGroup>
+                        <FormGroup>
+                          <InputGroup className="input-group-alternative mb-3">
+                            <InputGroupAddon addonType="prepend">
+                              <InputGroupText>
+                                <i className="ni ni-hat-3" />
+                              </InputGroupText>
+                            </InputGroupAddon>
+                            <Input
+                              placeholder="User name"
+                              name="username"
+                              type="text"
+                              value={this.username}
+                              onChange={this.handleChange}
+                              required
+                            />
                           </InputGroup>
                         </FormGroup>
                         <FormGroup>
@@ -121,7 +151,14 @@ class Register extends React.Component {
                                 <i className="ni ni-email-83" />
                               </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="Email" type="email" />
+                            <Input
+                              name="email"
+                              placeholder="Email"
+                              type="email"
+                              value={this.state.email}
+                              onChange={this.handleChange}
+                              required
+                            />
                           </InputGroup>
                         </FormGroup>
                         <FormGroup>
@@ -134,48 +171,37 @@ class Register extends React.Component {
                             <Input
                               placeholder="Password"
                               type="password"
+                              name="password"
                               autoComplete="off"
+                              value={this.state.password}
+                              onChange={this.handleChange}
+                              required
                             />
                           </InputGroup>
                         </FormGroup>
-                        <div className="text-muted font-italic">
-                          <small>
-                            password strength:{" "}
-                            <span className="text-success font-weight-700">
-                              strong
-                            </span>
-                          </small>
-                        </div>
-                        <Row className="my-4">
-                          <Col xs="12">
-                            <div className="custom-control custom-control-alternative custom-checkbox">
-                              <input
-                                className="custom-control-input"
-                                id="customCheckRegister"
-                                type="checkbox"
-                              />
-                              <label
-                                className="custom-control-label"
-                                htmlFor="customCheckRegister"
-                              >
-                                <span>
-                                  I agree with the{" "}
-                                  <a
-                                    href="#pablo"
-                                    onClick={e => e.preventDefault()}
-                                  >
-                                    Privacy Policy
-                                  </a>
-                                </span>
-                              </label>
-                            </div>
-                          </Col>
-                        </Row>
+                        <FormGroup>
+                          <Input
+                            type="select"
+                            name="country"
+                            id="country"
+                            value={this.state.country}
+                            onChange={this.handleChange}
+                            required
+                          >
+                            <option value="">Select country</option>
+                            <option value="Bosnia and Herzegovina">
+                              Bosnia and Herzegovina
+                            </option>
+                            <option value="Croatia">Croatia</option>
+                            <option value="Serbia">Serbia</option>
+                          </Input>
+                        </FormGroup>
+
                         <div className="text-center">
                           <Button
                             className="mt-4"
                             color="primary"
-                            type="button"
+                            type="submit"
                           >
                             Create account
                           </Button>

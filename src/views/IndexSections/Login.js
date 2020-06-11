@@ -34,11 +34,28 @@ import {
   InputGroup,
   Container,
   Row,
-  Col
+  Col,
 } from "reactstrap";
 
 class Login extends React.Component {
-  state = {};
+  state = {
+    email: "",
+    password: "",
+  };
+
+  handleSubmit = (event) => {
+    console.log("form submitted");
+
+    event.preventDefault();
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+
+    console.log(this.state);
+  };
   render() {
     return (
       <>
@@ -93,7 +110,7 @@ class Login extends React.Component {
                           className="btn-neutral btn-icon"
                           color="default"
                           href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          onClick={(e) => e.preventDefault()}
                         >
                           <span className="btn-inner--icon mr-1">
                             <img
@@ -107,7 +124,7 @@ class Login extends React.Component {
                           className="btn-neutral btn-icon"
                           color="default"
                           href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          onClick={(e) => e.preventDefault()}
                         >
                           <span className="btn-inner--icon mr-1">
                             <img
@@ -123,10 +140,10 @@ class Login extends React.Component {
                       <div className="text-center text-muted mb-4">
                         <small>Or sign in with credentials</small>
                       </div>
-                      <Form role="form">
+                      <Form role="form" onSubmit={this.handleSubmit}>
                         <FormGroup
                           className={classnames("mb-3", {
-                            focused: this.state.emailFocused
+                            focused: this.state.emailFocused,
                           })}
                         >
                           <InputGroup className="input-group-alternative">
@@ -138,18 +155,14 @@ class Login extends React.Component {
                             <Input
                               placeholder="Email"
                               type="email"
-                              onFocus={e =>
-                                this.setState({ emailFocused: true })
-                              }
-                              onBlur={e =>
-                                this.setState({ emailFocused: false })
-                              }
+                              value={this.state.email}
+                              onChange={this.handleChange}
                             />
                           </InputGroup>
                         </FormGroup>
                         <FormGroup
                           className={classnames({
-                            focused: this.state.passwordFocused
+                            focused: this.state.passwordFocused,
                           })}
                         >
                           <InputGroup className="input-group-alternative">
@@ -162,12 +175,8 @@ class Login extends React.Component {
                               placeholder="Password"
                               type="password"
                               autoComplete="off"
-                              onFocus={e =>
-                                this.setState({ passwordFocused: true })
-                              }
-                              onBlur={e =>
-                                this.setState({ passwordFocused: false })
-                              }
+                              value={this.state.password}
+                              onChange={this.handleChange}
                             />
                           </InputGroup>
                         </FormGroup>
@@ -188,7 +197,7 @@ class Login extends React.Component {
                           <Button
                             className="my-4"
                             color="primary"
-                            type="button"
+                            type="submit"
                           >
                             Sign in
                           </Button>

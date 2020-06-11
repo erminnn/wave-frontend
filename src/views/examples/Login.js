@@ -31,7 +31,7 @@ import {
   InputGroup,
   Container,
   Row,
-  Col
+  Col,
 } from "reactstrap";
 
 // core components
@@ -44,6 +44,23 @@ class Login extends React.Component {
     document.scrollingElement.scrollTop = 0;
     this.refs.main.scrollTop = 0;
   }
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: "",
+    };
+  }
+  handleSubmit = (event) => {
+    console.log(this.state);
+
+    event.preventDefault();
+  };
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
   render() {
     return (
       <>
@@ -66,44 +83,12 @@ class Login extends React.Component {
                   <Card className="bg-secondary shadow border-0">
                     <CardHeader className="bg-white pb-5">
                       <div className="text-muted text-center mb-3">
-                        <small>Sign in with</small>
+                        <h1>Sign in</h1>
                       </div>
-                      <div className="btn-wrapper text-center">
-                        <Button
-                          className="btn-neutral btn-icon"
-                          color="default"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <span className="btn-inner--icon mr-1">
-                            <img
-                              alt="..."
-                              src={require("assets/img/icons/common/github.svg")}
-                            />
-                          </span>
-                          <span className="btn-inner--text">Github</span>
-                        </Button>
-                        <Button
-                          className="btn-neutral btn-icon ml-1"
-                          color="default"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <span className="btn-inner--icon mr-1">
-                            <img
-                              alt="..."
-                              src={require("assets/img/icons/common/google.svg")}
-                            />
-                          </span>
-                          <span className="btn-inner--text">Google</span>
-                        </Button>
-                      </div>
+                      <div className="text-center"></div>
                     </CardHeader>
                     <CardBody className="px-lg-5 py-lg-5">
-                      <div className="text-center text-muted mb-4">
-                        <small>Or sign in with credentials</small>
-                      </div>
-                      <Form role="form">
+                      <Form role="form" onSubmit={this.handleSubmit}>
                         <FormGroup className="mb-3">
                           <InputGroup className="input-group-alternative">
                             <InputGroupAddon addonType="prepend">
@@ -111,7 +96,15 @@ class Login extends React.Component {
                                 <i className="ni ni-email-83" />
                               </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="Email" type="email" />
+                            <Input
+                              placeholder="Email"
+                              type="email"
+                              name="email"
+                              placeholder="Email"
+                              value={this.state.email}
+                              onChange={this.handleChange}
+                              required
+                            />
                           </InputGroup>
                         </FormGroup>
                         <FormGroup>
@@ -124,7 +117,11 @@ class Login extends React.Component {
                             <Input
                               placeholder="Password"
                               type="password"
+                              name="password"
                               autoComplete="off"
+                              value={this.state.password}
+                              onChange={this.handleChange}
+                              required
                             />
                           </InputGroup>
                         </FormGroup>
@@ -145,7 +142,7 @@ class Login extends React.Component {
                           <Button
                             className="my-4"
                             color="primary"
-                            type="button"
+                            type="submit"
                           >
                             Sign in
                           </Button>
@@ -158,7 +155,7 @@ class Login extends React.Component {
                       <a
                         className="text-light"
                         href="#pablo"
-                        onClick={e => e.preventDefault()}
+                        onClick={(e) => e.preventDefault()}
                       >
                         <small>Forgot password?</small>
                       </a>
@@ -167,7 +164,7 @@ class Login extends React.Component {
                       <a
                         className="text-light"
                         href="#pablo"
-                        onClick={e => e.preventDefault()}
+                        onClick={(e) => e.preventDefault()}
                       >
                         <small>Create new account</small>
                       </a>
