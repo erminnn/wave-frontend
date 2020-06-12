@@ -27,7 +27,8 @@ import {
   InputGroup,
   Container,
   Row,
-  Col
+  Col,
+  Card,
 } from "reactstrap";
 
 class Inputs extends React.Component {
@@ -44,72 +45,78 @@ class Inputs extends React.Component {
                 Form controls
               </small>
             </div>
-            <Row>
-              <Col lg="4" sm="6">
-                <FormGroup>
-                  <Input placeholder="Regular" type="text" />
-                </FormGroup>
-                <FormGroup
-                  className={classnames({
-                    focused: this.state.searchFocused
-                  })}
-                >
-                  <InputGroup className="mb-4">
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="ni ni-zoom-split-in" />
-                      </InputGroupText>
-                    </InputGroupAddon>
+            <Card className="border border-primary mb-2">
+              <Row>
+                <Col lg="4" sm="6">
+                  <FormGroup>
+                    <Input placeholder="Regular" type="text" />
+                  </FormGroup>
+                  <FormGroup
+                    className={classnames({
+                      focused: this.state.searchFocused,
+                    })}
+                  >
+                    <InputGroup className="mb-4">
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="ni ni-zoom-split-in" />
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        placeholder="Search"
+                        type="text"
+                        onFocus={(e) => this.setState({ searchFocused: true })}
+                        onBlur={(e) => this.setState({ searchFocused: false })}
+                      />
+                    </InputGroup>
+                  </FormGroup>
+                </Col>
+                <Col lg="4" sm="6">
+                  <FormGroup>
+                    <Input disabled placeholder="Regular" type="text" />
+                  </FormGroup>
+                  <FormGroup
+                    className={classnames({
+                      focused: this.state.birthdayFocused,
+                    })}
+                  >
+                    <InputGroup className="mb-4">
+                      <Input
+                        placeholder="Birthday"
+                        type="text"
+                        onFocus={(e) =>
+                          this.setState({ birthdayFocused: true })
+                        }
+                        onBlur={(e) =>
+                          this.setState({ birthdayFocused: false })
+                        }
+                      />
+                      <InputGroupAddon addonType="append">
+                        <InputGroupText>
+                          <i className="ni ni-zoom-split-in" />
+                        </InputGroupText>
+                      </InputGroupAddon>
+                    </InputGroup>
+                  </FormGroup>
+                </Col>
+                <Col lg="4" sm="6">
+                  <FormGroup className="has-success">
                     <Input
-                      placeholder="Search"
+                      className="is-valid"
+                      placeholder="Success"
                       type="text"
-                      onFocus={e => this.setState({ searchFocused: true })}
-                      onBlur={e => this.setState({ searchFocused: false })}
                     />
-                  </InputGroup>
-                </FormGroup>
-              </Col>
-              <Col lg="4" sm="6">
-                <FormGroup>
-                  <Input disabled placeholder="Regular" type="text" />
-                </FormGroup>
-                <FormGroup
-                  className={classnames({
-                    focused: this.state.birthdayFocused
-                  })}
-                >
-                  <InputGroup className="mb-4">
+                  </FormGroup>
+                  <FormGroup className="has-danger">
                     <Input
-                      placeholder="Birthday"
-                      type="text"
-                      onFocus={e => this.setState({ birthdayFocused: true })}
-                      onBlur={e => this.setState({ birthdayFocused: false })}
+                      className="is-invalid"
+                      placeholder="Error Input"
+                      type="email"
                     />
-                    <InputGroupAddon addonType="append">
-                      <InputGroupText>
-                        <i className="ni ni-zoom-split-in" />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                  </InputGroup>
-                </FormGroup>
-              </Col>
-              <Col lg="4" sm="6">
-                <FormGroup className="has-success">
-                  <Input
-                    className="is-valid"
-                    placeholder="Success"
-                    type="text"
-                  />
-                </FormGroup>
-                <FormGroup className="has-danger">
-                  <Input
-                    className="is-invalid"
-                    placeholder="Error Input"
-                    type="email"
-                  />
-                </FormGroup>
-              </Col>
-            </Row>
+                  </FormGroup>
+                </Col>
+              </Row>
+            </Card>
           </Container>
           <div className="py-5 bg-secondary">
             <Container>
@@ -130,7 +137,7 @@ class Inputs extends React.Component {
                   </FormGroup>
                   <FormGroup
                     className={classnames({
-                      focused: this.state.searchAltFocused
+                      focused: this.state.searchAltFocused,
                     })}
                   >
                     <InputGroup className="input-group-alternative mb-4">
@@ -142,8 +149,12 @@ class Inputs extends React.Component {
                       <Input
                         placeholder="Search"
                         type="text"
-                        onFocus={e => this.setState({ searchAltFocused: true })}
-                        onBlur={e => this.setState({ searchAltFocused: false })}
+                        onFocus={(e) =>
+                          this.setState({ searchAltFocused: true })
+                        }
+                        onBlur={(e) =>
+                          this.setState({ searchAltFocused: false })
+                        }
                       />
                     </InputGroup>
                   </FormGroup>
@@ -159,17 +170,17 @@ class Inputs extends React.Component {
                   </FormGroup>
                   <FormGroup
                     className={classnames({
-                      focused: this.state.birthdayAltFocused
+                      focused: this.state.birthdayAltFocused,
                     })}
                   >
                     <InputGroup className="input-group-alternative mb-4">
                       <Input
                         placeholder="Birthday"
                         type="text"
-                        onFocus={e =>
+                        onFocus={(e) =>
                           this.setState({ birthdayAltFocused: true })
                         }
-                        onBlur={e =>
+                        onBlur={(e) =>
                           this.setState({ birthdayAltFocused: false })
                         }
                       />
