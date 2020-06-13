@@ -62,7 +62,7 @@ class Index extends React.Component {
         <main ref="main">
           <Hero />
           <Talents />
-          <Buttons />
+          {/*<Buttons />
           <Inputs />
           <section className="section">
             <Container>
@@ -92,7 +92,7 @@ class Index extends React.Component {
           <Carousel />
           <Icons />
           <Login />
-          <Download />
+          <Download />*/}
         </main>
         <CardsFooter />
       </Provider>

@@ -47,14 +47,14 @@ class Hero extends React.Component {
                     <img
                       alt="..."
                       className="img-fluid"
-                      src={require("assets/img/brand/argon-react-white.png")}
-                      style={{ width: "200px" }}
+                      src={require("assets/img/brand/bars-white.png")}
+                      style={{ width: "270px", height: ""  }}
                     />
+                    <h1 className= "text-white"> WAVE.BA</h1>
                     <p className="lead text-white">
-                      A beautiful Design System for Bootstrap 4. It's Free and
-                      Open Source.
+                      "Sound is 50 percent of the movie going experience"
                     </p>
-                    <div className="btn-wrapper mt-5">
+                    {/*<div className="btn-wrapper mt-5">
                       <Button
                         className="btn-white btn-icon mb-3 mb-sm-0"
                         color="default"
@@ -81,7 +81,7 @@ class Hero extends React.Component {
                           on Github
                         </span>
                       </Button>
-                    </div>
+                    </div>*/}
                     <div className="mt-5">
                       <small className="text-white font-weight-bold mb-0 mr-2">
                         *proudly coded by
