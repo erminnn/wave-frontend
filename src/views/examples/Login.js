@@ -65,6 +65,8 @@ function Login() {
           });
           console.log(response)
           setErrorMsg("")
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("username", username);
           goHome();
         } catch (e) {
           console.error(e);
