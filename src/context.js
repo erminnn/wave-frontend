@@ -1,30 +1,7 @@
 import React, { Component } from "react";
-
+import axios from "axios";
 const Context = React.createContext();
-/*
- console.log(filter_field, filter_value);
 
-      const filteredTalents = [];
-      if (filter_field === "voice_age") {
-        globalState.talents.forEach((talent) => {
-          if (talent.voice_age === filter_value) {
-            filteredTalents.push(talent);
-          }
-        });
-      } else if (filter_field === "gender") {
-        globalState.talents.forEach((talent) => {
-          if (talent.gender === filter_value) {
-            filteredTalents.push(talent);
-          }
-        });
-      } else {
-        globalState.talents.forEach((talent) => {
-          if (talent.language === filter_value) {
-            filteredTalents.push(talent);
-          }
-        });
-      }
-*/
 const globalState = {
   talents: [
     {
@@ -158,47 +135,7 @@ const reducer = (state, action) => {
 
 export class Provider extends Component {
   state = {
-    talents: [
-      {
-        id: 1,
-        firstname: "Ermin Bosnian Young Adult",
-        lastname: "Omeragic",
-        language: "Bosnian",
-        gender: "Male",
-        country: "Bosnia and Herzegovina",
-        voice_age: "Young Adult",
-        voice_sample_url: "assets/img/mus.mp3",
-        voice_sample_name:
-          "Cehennem Beat - Asıl Mesele (ÇUKUR VARTOLU RAMİZ DAYI)",
-        user_img: "assets/img/theme/team-4-800x800.jpg",
-      },
-      {
-        id: 2,
-        firstname: "Ermin2 Young Adult English",
-        lastname: "Omeragic",
-        language: "English",
-        gender: "Both",
-        country: "Bosnia and Herzegovina",
-        voice_age: "Young Adult",
-        voice_sample_url: "assets/img/mus.mp3",
-        voice_sample_name:
-          "Cehennem Beat - Asıl Mesele (ÇUKUR VARTOLU RAMİZ DAYI)",
-        user_img: "assets/img/theme/team-4-800x800.jpg",
-      },
-      {
-        id: 3,
-        firstname: "Ermin3 Senior Deutsch",
-        lastname: "Omeragic",
-        language: "Deutsch",
-        gender: "Male",
-        country: "Bosnia and Herzegovina",
-        voice_age: "Senior",
-        voice_sample_url: "assets/img/mus.mp3",
-        voice_sample_name:
-          "Cehennem Beat - Asıl Mesele (ÇUKUR VARTOLU RAMİZ DAYI)",
-        user_img: "assets/img/theme/team-4-800x800.jpg",
-      },
-    ],
+    talents: [],
     filter: {
       gender: "",
       voice_age: "",
@@ -208,6 +145,67 @@ export class Provider extends Component {
       this.setState((state) => reducer(state, action));
     },
   };
+
+  async componentDidMount() {
+    const talents = [];
+    const res = await axios.get("http://localhost:8080/api/talents", {
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5MjY3ODc2OSwiaWF0IjoxNTkyMDczOTY5fQ.kUME5yDUZDogkSJp_FeAwSrn56-_rPbg2reD2kjC4D7iPXS-lh0dvAXC1DG5w12lAhO85GCABT0lDeL7MfeXNw`,
+      },
+    });
+
+    const responseTalents = res.data._embedded.talents;
+    for (let i = 0; i < responseTalents.length; i++) {
+      const responseIntonations = await axios.get(
+        `${responseTalents[i]._links.intonations.href}`,
+        {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5MjY3ODc2OSwiaWF0IjoxNTkyMDczOTY5fQ.kUME5yDUZDogkSJp_FeAwSrn56-_rPbg2reD2kjC4D7iPXS-lh0dvAXC1DG5w12lAhO85GCABT0lDeL7MfeXNw`,
+          },
+        }
+      );
+      const intonations = responseIntonations.data._embedded.intonations;
+
+      const responseLanguage = await axios.get(
+        `${responseTalents[i]._links.languagesSpoken.href}`,
+        {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5MjY3ODc2OSwiaWF0IjoxNTkyMDczOTY5fQ.kUME5yDUZDogkSJp_FeAwSrn56-_rPbg2reD2kjC4D7iPXS-lh0dvAXC1DG5w12lAhO85GCABT0lDeL7MfeXNw`,
+          },
+        }
+      );
+
+      const languages = responseLanguage.data._embedded.languages;
+
+      const responseVoiceType = await axios.get(
+        `${responseTalents[i]._links.voiceTypes.href}`,
+        {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5MjY3ODc2OSwiaWF0IjoxNTkyMDczOTY5fQ.kUME5yDUZDogkSJp_FeAwSrn56-_rPbg2reD2kjC4D7iPXS-lh0dvAXC1DG5w12lAhO85GCABT0lDeL7MfeXNw`,
+          },
+        }
+      );
+      const voiceTypes = responseVoiceType.data._embedded.voiceTypes;
+      const talent = {
+        id: i,
+        firstname: responseTalents[i].firstName,
+        lastname: responseTalents[i].lastName,
+        languages: languages,
+        voiceTypes: voiceTypes,
+        country: responseTalents[i].country,
+        intonations: intonations,
+        voice_sample_url: "assets/img/mus.mp3",
+        voice_sample_name:
+          "Cehennem Beat - Asıl Mesele (ÇUKUR VARTOLU RAMİZ DAYI)",
+        user_img: "assets/img/theme/team-4-800x800.jpg",
+      };
+      talents.push(talent);
+    }
+
+    this.setState({
+      talents: talents,
+    });
+  }
   render() {
     return (
       <Context.Provider value={this.state}>

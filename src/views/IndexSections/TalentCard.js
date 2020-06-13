@@ -13,19 +13,20 @@ class TalentCard extends Component {
     user_img: "assets/img/theme/team-4-800x800.jpg",
   };
 
-  componentDidMount() {}
-
   render() {
     const {
       firstname,
-      language,
+      languages,
       lastname,
+      voiceTypes,
       country,
-      voice_age,
+      intonations,
       voice_sample_name,
       voice_sample_url,
       user_img,
     } = this.props.talent;
+    console.log(languages);
+
     return (
       <Container>
         <Card className="border border-primary mb-2">
@@ -49,11 +50,12 @@ class TalentCard extends Component {
                 {country}
               </small>
               <small className="d-block text-primary text-center mb-2">
-                <i className="fa fa-globe" aria-hidden="true"></i> {language}
+                <i className="fa fa-globe" aria-hidden="true"></i>
+                {languages.map((language) => " " + language.name + " ")}
               </small>
               <small className="d-block text-primary text-center mb-2">
-                <i className="fa fa-microphone" aria-hidden="true"></i>{" "}
-                {voice_age}
+                <i className="fa fa-microphone" aria-hidden="true"></i>
+                {intonations.map((intonation) => " " + intonation.type + " ")}
               </small>
             </Col>
             <Col className="mt-4 mt-md-0" lg="3" sm="6">
