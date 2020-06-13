@@ -148,10 +148,15 @@ export class Provider extends Component {
 
   async componentDidMount() {
     const talents = [];
+    const token = localStorage.getItem("token");
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    console.log(token);
+
     const res = await axios.get("http://localhost:8080/api/talents", {
-      headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5MjY3ODc2OSwiaWF0IjoxNTkyMDczOTY5fQ.kUME5yDUZDogkSJp_FeAwSrn56-_rPbg2reD2kjC4D7iPXS-lh0dvAXC1DG5w12lAhO85GCABT0lDeL7MfeXNw`,
-      },
+      headers,
     });
 
     const responseTalents = res.data._embedded.talents;
@@ -159,9 +164,7 @@ export class Provider extends Component {
       const responseIntonations = await axios.get(
         `${responseTalents[i]._links.intonations.href}`,
         {
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5MjY3ODc2OSwiaWF0IjoxNTkyMDczOTY5fQ.kUME5yDUZDogkSJp_FeAwSrn56-_rPbg2reD2kjC4D7iPXS-lh0dvAXC1DG5w12lAhO85GCABT0lDeL7MfeXNw`,
-          },
+          headers,
         }
       );
       const intonations = responseIntonations.data._embedded.intonations;
@@ -169,9 +172,7 @@ export class Provider extends Component {
       const responseLanguage = await axios.get(
         `${responseTalents[i]._links.languagesSpoken.href}`,
         {
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5MjY3ODc2OSwiaWF0IjoxNTkyMDczOTY5fQ.kUME5yDUZDogkSJp_FeAwSrn56-_rPbg2reD2kjC4D7iPXS-lh0dvAXC1DG5w12lAhO85GCABT0lDeL7MfeXNw`,
-          },
+          headers,
         }
       );
 
@@ -180,9 +181,7 @@ export class Provider extends Component {
       const responseVoiceType = await axios.get(
         `${responseTalents[i]._links.voiceTypes.href}`,
         {
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5MjY3ODc2OSwiaWF0IjoxNTkyMDczOTY5fQ.kUME5yDUZDogkSJp_FeAwSrn56-_rPbg2reD2kjC4D7iPXS-lh0dvAXC1DG5w12lAhO85GCABT0lDeL7MfeXNw`,
-          },
+          headers,
         }
       );
       const voiceTypes = responseVoiceType.data._embedded.voiceTypes;
