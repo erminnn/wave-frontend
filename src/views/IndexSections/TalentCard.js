@@ -28,7 +28,7 @@ class TalentCard extends Component {
     } = this.props.talent;
     return (
       <Container>
-        <Card className="border border-primary mb-2">
+        <Card className="border mb-2">
           <Row>
             <Col lg="3" md="6">
               <img
