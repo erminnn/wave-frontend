@@ -12,17 +12,19 @@ import {
 
 class TalentFilter extends Component {
   state = {
-    gender: "",
-    voice_age: "",
-    language: "",
+    gender: "default",
+    voice_age: "default",
+    language: "default",
   };
-  handleChange = (dispatch, event) => {
-    dispatch({
+  handleChange = async (dispatch, event) => {
+    await this.setState({ [event.target.name]: event.target.value });
+    await dispatch({
+      type: "UPDATE_FILTER",
+      payload: this.state,
+    });
+
+    await dispatch({
       type: "FILTER_TALENTS",
-      payload: {
-        filter_field: event.target.name,
-        filter_value: event.target.value,
-      },
     });
   };
   onClearAllFilters = () => {
