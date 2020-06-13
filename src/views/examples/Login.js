@@ -100,7 +100,6 @@ class Login extends React.Component {
                               placeholder="Email"
                               type="email"
                               name="email"
-                              placeholder="Email"
                               value={this.state.email}
                               onChange={this.handleChange}
                               required

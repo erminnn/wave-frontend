@@ -25,7 +25,7 @@ class TalentCard extends Component {
       voice_sample_name,
       voice_sample_url,
       user_img,
-    } = this.state;
+    } = this.props.talent;
     return (
       <Container>
         <Card className="border border-primary mb-2">
@@ -64,7 +64,7 @@ class TalentCard extends Component {
                 />
               </div>
               <small className="d-block text-uppercase font-weight-bold text-center mb-4 mt-1 text-primary">
-                Cehennem Beat - Asıl Mesele (ÇUKUR VARTOLU RAMİZ DAYI)
+                {voice_sample_name}
               </small>
             </Col>
             <Col className="mt-auto mb-auto mt-md-0" lg="3" sm="6">

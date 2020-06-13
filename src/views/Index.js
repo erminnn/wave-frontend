@@ -47,6 +47,8 @@ import Login from "./IndexSections/Login.js";
 import Download from "./IndexSections/Download.js";
 import Talents from "./IndexSections/Talents.js";
 
+import { Provider } from "../../src/context.js";
+
 class Index extends React.Component {
   componentDidMount() {
     document.documentElement.scrollTop = 0;
@@ -55,7 +57,7 @@ class Index extends React.Component {
   }
   render() {
     return (
-      <>
+      <Provider>
         <DemoNavbar />
         <main ref="main">
           <Hero />
@@ -93,7 +95,7 @@ class Index extends React.Component {
           <Download />
         </main>
         <CardsFooter />
-      </>
+      </Provider>
     );
   }
 }

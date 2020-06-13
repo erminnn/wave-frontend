@@ -32,7 +32,6 @@ import {
   Container,
   Row,
   Col,
-  Label,
 } from "reactstrap";
 
 // core components
