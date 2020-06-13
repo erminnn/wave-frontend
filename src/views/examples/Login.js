@@ -1,21 +1,7 @@
-/*!
+import React, {useState, useRef, useEffect} from "react"
+import {useHistory} from "react-router-dom";
+import axios from "axios"
 
-=========================================================
-* Argon Design System React - v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-design-system-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-design-system-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React from "react";
 
 // reactstrap components
 import {
@@ -38,44 +24,74 @@ import {
 import DemoNavbar from "components/Navbars/DemoNavbar.js";
 import SimpleFooter from "components/Footers/SimpleFooter.js";
 
-class Login extends React.Component {
-  componentDidMount() {
+function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  let history = useHistory();
+  let ref = useRef("main")
+
+  function goHome() {
+    history.push("/");
+  }
+
+/*
+  useEffect(() => {
+    setErrorMsg("")
+  });
+*/
+
+  /*componentDidMount() {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     this.refs.main.scrollTop = 0;
-  }
-  constructor(props) {
+  }*/
+  /*constructor(props) {
     super(props);
     this.state = {
       email: "",
       password: "",
     };
-  }
-  handleSubmit = (event) => {
-    console.log(this.state);
+  }*/
 
-    event.preventDefault();
-  };
-  handleChange = (event) => {
+  let handleSubmit = async (event) => {
+        console.log(username, password);
+        event.preventDefault();
+
+        try {
+          let response = await axios.post('http://127.0.0.1:8080/auth', {
+            "username": username,
+            "password": password
+          });
+          console.log(response)
+          setErrorMsg("")
+          goHome();
+        } catch (e) {
+          console.error(e);
+          setErrorMsg("Invalid credentials")
+        }
+      };
+
+/*  let handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
-  };
-  render() {
-    return (
+  };*/
+
+  return (
       <>
-        <DemoNavbar />
-        <main ref="main">
+        <DemoNavbar/>
+        <main ref={ref}>
           <section className="section section-shaped section-lg">
             <div className="shape shape-style-1 bg-gradient-default">
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
+              <span/>
+              <span/>
+              <span/>
+              <span/>
+              <span/>
+              <span/>
+              <span/>
+              <span/>
             </div>
             <Container className="pt-lg-7">
               <Row className="justify-content-center">
@@ -85,24 +101,24 @@ class Login extends React.Component {
                       <div className="text-muted text-center mb-3">
                         <h1>Sign in</h1>
                       </div>
-                      <div className="text-center"></div>
+                      <div className="text-center text-danger"> {errorMsg}</div>
                     </CardHeader>
                     <CardBody className="px-lg-5 py-lg-5">
-                      <Form role="form" onSubmit={this.handleSubmit}>
+                      <Form role="form"
+                            onSubmit={handleSubmit}>
                         <FormGroup className="mb-3">
                           <InputGroup className="input-group-alternative">
                             <InputGroupAddon addonType="prepend">
                               <InputGroupText>
-                                <i className="ni ni-email-83" />
+                                <i className="ni ni-email-83"/>
                               </InputGroupText>
                             </InputGroupAddon>
                             <Input
-                              placeholder="Email"
-                              type="email"
-                              name="email"
-                              value={this.state.email}
-                              onChange={this.handleChange}
-                              required
+                                placeholder="Email"
+                                name="email"
+                                value={username}
+                                onChange={e => setUsername(e.target.value)}
+                                required
                             />
                           </InputGroup>
                         </FormGroup>
@@ -110,38 +126,38 @@ class Login extends React.Component {
                           <InputGroup className="input-group-alternative">
                             <InputGroupAddon addonType="prepend">
                               <InputGroupText>
-                                <i className="ni ni-lock-circle-open" />
+                                <i className="ni ni-lock-circle-open"/>
                               </InputGroupText>
                             </InputGroupAddon>
                             <Input
-                              placeholder="Password"
-                              type="password"
-                              name="password"
-                              autoComplete="off"
-                              value={this.state.password}
-                              onChange={this.handleChange}
-                              required
+                                placeholder="Password"
+                                type="password"
+                                name="password"
+                                autoComplete="off"
+                                value= {password}
+                                onChange={e => setPassword(e.target.value)}
+                                required
                             />
                           </InputGroup>
                         </FormGroup>
                         <div className="custom-control custom-control-alternative custom-checkbox">
                           <input
-                            className="custom-control-input"
-                            id=" customCheckLogin"
-                            type="checkbox"
+                              className="custom-control-input"
+                              id=" customCheckLogin"
+                              type="checkbox"
                           />
                           <label
-                            className="custom-control-label"
-                            htmlFor=" customCheckLogin"
+                              className="custom-control-label"
+                              htmlFor=" customCheckLogin"
                           >
                             <span>Remember me</span>
                           </label>
                         </div>
                         <div className="text-center">
                           <Button
-                            className="my-4"
-                            color="primary"
-                            type="submit"
+                              className="my-4"
+                              color="primary"
+                              type="submit"
                           >
                             Sign in
                           </Button>
@@ -152,18 +168,19 @@ class Login extends React.Component {
                   <Row className="mt-3">
                     <Col xs="6">
                       <a
-                        className="text-light"
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
+                          className="text-light"
+                          href={"#"}
+                          onClick={(e) => e.preventDefault()}
                       >
                         <small>Forgot password?</small>
                       </a>
                     </Col>
-                    <Col className="text-right" xs="6">
+                    <Col className="text-right"
+                         xs="6">
                       <a
-                        className="text-light"
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
+                          className="text-light"
+                          href={"#pablo"}
+                          onClick={(e) => e.preventDefault()}
                       >
                         <small>Create new account</small>
                       </a>
@@ -174,10 +191,9 @@ class Login extends React.Component {
             </Container>
           </section>
         </main>
-        <SimpleFooter />
+        <SimpleFooter/>
       </>
-    );
-  }
+  );
 }
 
 export default Login;
