@@ -75,8 +75,9 @@ class DemoNavbar extends React.Component {
               <NavbarBrand className="mr-lg-5" to="/" tag={Link}>
                 <img
                   alt="..."
-                  src={require("assets/img/brand/argon-react-white.png")}
+                  src={require("assets/img/brand/wave-text-logo-trans.png")}
                 />
+
               </NavbarBrand>
               <button className="navbar-toggler" id="navbar_global">
                 <span className="navbar-toggler-icon" />
@@ -94,7 +95,7 @@ class DemoNavbar extends React.Component {
                       <Link to="/">
                         <img
                           alt="..."
-                          src={require("assets/img/brand/argon-react.png")}
+                          src={require("assets/img/brand/wave-text-logo-trans.png")}
                         />
                       </Link>
                     </Col>
@@ -107,6 +108,16 @@ class DemoNavbar extends React.Component {
                   </Row>
                 </div>
                 <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+                  <NavItem>
+                    <NavLink to="/login-page" tag={Link}>
+                      Login <span className="sr-only">(current)</span>
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/register-page" tag={Link}>
+                      Register
+                    </NavLink>
+                  </NavItem>
                   <UncontrolledDropdown nav>
                     <DropdownToggle nav>
                       <i className="ni ni-ui-04 d-lg-none mr-1" />
@@ -257,7 +268,7 @@ class DemoNavbar extends React.Component {
                       Star us on Github
                     </UncontrolledTooltip>
                   </NavItem>
-                  <NavItem className="d-none d-lg-block ml-lg-4">
+                  {/*<NavItem className="d-none d-lg-block ml-lg-4">
                     <Button
                       className="btn-neutral btn-icon"
                       color="default"
@@ -271,7 +282,7 @@ class DemoNavbar extends React.Component {
                         Download
                       </span>
                     </Button>
-                  </NavItem>
+                  </NavItem>*/}
                 </Nav>
               </UncontrolledCollapse>
             </Container>

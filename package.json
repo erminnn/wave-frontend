@@ -48,6 +48,7 @@
     "not op_mini all"
   ],
   "dependencies": {
+    "assets": "^3.0.1",
     "bootstrap": "^4.5.0",
     "classnames": "^2.2.6",
     "headroom.js": "0.11.0",
@@ -67,6 +68,7 @@
     "@types/googlemaps": "3.39.2",
     "@types/markerclustererplus": "2.1.33",
     "@types/react": "16.9.19",
+    "components": "^0.1.0",
     "eslint-plugin-flowtype": "3.13.0",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",
