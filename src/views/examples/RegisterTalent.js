@@ -136,16 +136,16 @@ class RegisterTalent extends Component {
     console.log(checkedVoiceTypes);
     const talent = {
       username: this.state.username,
-      firstname: this.state.firstname,
-      lastname: this.state.lastname,
-      email: this.state.email,
       password: this.state.password,
+      firstName: this.state.firstname,
+      lastName: this.state.lastname,
+      email: this.state.email,
       enabled: true,
-      lastPasswordResetDate: "11.04.2020.",
+      lastPasswordResetDate: "11.03.2020.",
       roles: ["http://localhost:8080/api/roles/3"],
-      intonations: checkedIntonations,
+      languagesSpoken: checkedLanguages,
       voiceTypes: checkedVoiceTypes,
-      languages: checkedLanguages,
+      intonations: checkedIntonations,
     };
 
     console.log(talent);
