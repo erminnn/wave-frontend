@@ -44,17 +44,14 @@ class TalentCard extends Component {
                   {firstname + " " + lastname}
                 </small>
               </h4>
-              <small className="d-block text-primary text-center mb-2">
-                <i className="fa fa-map-marker mr-1" aria-hidden="true"></i>
-                {country}
-              </small>
+
               <small className="d-block text-primary text-center mb-2">
                 <i className="fa fa-globe" aria-hidden="true"></i>
-                {languages.map((language) => " " + language + " ")}
+                {languages.map((language) => " " + language.name + " ")}
               </small>
               <small className="d-block text-primary text-center mb-2">
                 <i className="fa fa-microphone" aria-hidden="true"></i>
-                {intonations.map((intonation) => " " + intonation + " ")}
+                {intonations.map((intonation) => " " + intonation.type + " ")}
               </small>
             </Col>
             <Col className="mt-4 mt-md-0" lg="3" sm="6">
