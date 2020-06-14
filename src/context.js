@@ -98,6 +98,9 @@ const reducer = async (state, action) => {
 const fetchTalents = async () => {
   const talents = [];
   const token = localStorage.getItem("token");
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
 
   const res = await axios.get("http://localhost:8080/api/talents");
 
@@ -158,10 +161,11 @@ export class Provider extends Component {
   };
 
   async componentDidMount() {
-    console.log("DAA");
-
     const talents = await fetchTalents();
     this.setState({ ...this.state, talents: talents });
+  }
+  componentDidUpdate() {
+    console.log(this.state);
   }
 
   render() {
