@@ -97,12 +97,9 @@ const reducer = async (state, action) => {
 
 const fetchTalents = async () => {
   const talents = [];
-  const token = localStorage.getItem("token");
-  const headers = {
-    Authorization: `Bearer ${token}`,
-  };
 
   const res = await axios.get("http://localhost:8080/api/talents");
+  console.log(res);
 
   const responseTalents = res.data._embedded.talents;
   for (let i = 0; i < responseTalents.length; i++) {

@@ -10,6 +10,7 @@ import Index from "views/Index.js";
 import Login from "views/examples/Login.js";
 import Profile from "views/examples/Profile.js";
 import Register from "views/examples/Register.js";
+import RegisterTalent from "views/examples/RegisterTalent.js";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -29,6 +30,11 @@ ReactDOM.render(
         path="/register-page"
         exact
         render={(props) => <Register {...props} />}
+      />
+      <Route
+        path="/registerTalent"
+        exact
+        render={(props) => <RegisterTalent {...props} />}
       />
       <Redirect to="/" />
     </Switch>
