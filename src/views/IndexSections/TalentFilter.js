@@ -51,7 +51,7 @@ class TalentFilter extends Component {
                   <Col lg="3" md="6">
                     <h3>
                       <small className="d-block text-center font-weight-bold mb-2 mt-1">
-                        Gender
+                        Voice type
                       </small>
                     </h3>
                     <div className="ml-5">
