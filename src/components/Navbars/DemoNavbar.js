@@ -185,8 +185,8 @@ class DemoNavbar extends React.Component {
         <NavItem>
           <a
               className="text-white"
-              onClick={this.logout}
-          >
+              style={{cursor: "default"}}
+              onClick={this.logout}>
             Log out
           </a>
         </NavItem>
