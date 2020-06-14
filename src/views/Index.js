@@ -18,7 +18,7 @@
 import React from "react";
 
 // reactstrap components
-import { Container, Row } from "reactstrap";
+import {Button, Container, Modal, ModalBody, ModalFooter, ModalHeader, Row} from "reactstrap";
 
 // core components
 import DemoNavbar from "components/Navbars/DemoNavbar.js";
@@ -59,6 +59,7 @@ class Index extends React.Component {
     return (
       <Provider>
         <DemoNavbar />
+
         <main ref="main">
           <Hero />
           <Talents />
@@ -94,6 +95,27 @@ class Index extends React.Component {
           <Login />
           <Download />*/}
         </main>
+        {/*<div className="modal fade bd-example-modal-sm"
+             tabIndex="-1"
+             role="dialog"
+             aria-labelledby="mySmallModalLabel"
+             aria-hidden="true">
+          <div className="modal-dialog modal-sm">
+            <div className="modal-content text-center text-capitalize">
+              You have registered successfully!!
+            </div>
+          </div>
+        </div>*/}
+        {/*<Modal isOpen={false}>
+          <ModalHeader>Modal title</ModalHeader>
+          <ModalBody>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" >Do Something</Button>{' '}
+            <Button color="secondary">Cancel</Button>
+          </ModalFooter>
+        </Modal>*/}
         <CardsFooter />
       </Provider>
     );

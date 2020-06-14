@@ -1,74 +1,88 @@
-/*!
-
-=========================================================
-* Argon Design System React - v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-design-system-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-design-system-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React from "react";
-
+import React, {useRef, useState} from "react";
 // reactstrap components
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
-  FormGroup,
+  CardHeader,
+  Col,
+  Container,
   Form,
+  FormGroup,
   Input,
+  InputGroup,
   InputGroupAddon,
   InputGroupText,
-  InputGroup,
-  Container,
   Row,
-  Col,
 } from "reactstrap";
-
 // core components
 import DemoNavbar from "components/Navbars/DemoNavbar.js";
 import SimpleFooter from "components/Footers/SimpleFooter.js";
+import axios from "axios";
+import {useHistory} from "react-router-dom";
 
-class Register extends React.Component {
-  componentDidMount() {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-    this.refs.main.scrollTop = 0;
-  }
-
-  state = {
+function Register () {
+  const [state, setState] = useState( {
     username: "",
     firstname: "",
     lastname: "",
     email: "",
     password: "",
     country: "",
-  };
+  });
 
-  handleSubmit = (event) => {
-    console.log(this.state);
+  let ref = useRef("main")
+  let history = useHistory();
+
+ /* componentDidMount() {
+    document.documentElement.scrollTop = 0;
+    document.scrollingElement.scrollTop = 0;
+    this.refs.main.scrollTop = 0;
+  }*/
+
+
+  function getData() {
+    return {
+      "username": state.username,
+      "password": state.password,
+      "firstName": state.firstname,
+      "lastName": state.lastname,
+      "email": state.email,
+      "enabled": true,
+      "lastPasswordResetDate": "11.04.2020.",
+      "roles": [
+        "http://localhost:8080/api/roles/1"
+      ]
+    };
+  }
+
+  let handleSubmit = async (event) => {
+    console.log(state);
     event.preventDefault();
-  };
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+
+    try {
+      let response = await axios.post('http://localhost:8080/api/users', getData());
+      console.log(response)
+      history.push("/");
+      document.getElementsByClassName('modal').className = "modal fade show";
+
+    } catch (e) {
+      console.error(e);
+    }
   };
 
-  render() {
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setState(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
     return (
       <>
         <DemoNavbar />
-        <main ref="main">
+        <main ref={ref}>
           <section className="section section-shaped section-lg">
             <div className="shape shape-style-1 bg-gradient-default">
               <span />
@@ -91,7 +105,7 @@ class Register extends React.Component {
                       <div className="text-center"></div>
                     </CardHeader>
                     <CardBody className="px-lg-5 py-lg-5">
-                      <Form role="form" onSubmit={this.handleSubmit}>
+                      <Form role="form">
                         <FormGroup>
                           <InputGroup className="input-group-alternative mb-3">
                             <InputGroupAddon addonType="prepend">
@@ -103,8 +117,8 @@ class Register extends React.Component {
                               placeholder="First name"
                               name="firstname"
                               type="text"
-                              value={this.firstname}
-                              onChange={this.handleChange}
+                              value={state.firstname}
+                              onChange={handleChange}
                               required
                             />
                           </InputGroup>
@@ -120,8 +134,8 @@ class Register extends React.Component {
                               placeholder="Last name"
                               name="lastname"
                               type="text"
-                              value={this.lastname}
-                              onChange={this.handleChange}
+                              value={state.lastname}
+                              onChange={handleChange}
                               required
                             />
                           </InputGroup>
@@ -137,8 +151,8 @@ class Register extends React.Component {
                               placeholder="User name"
                               name="username"
                               type="text"
-                              value={this.username}
-                              onChange={this.handleChange}
+                              value={state.username}
+                              onChange={handleChange}
                               required
                             />
                           </InputGroup>
@@ -154,8 +168,8 @@ class Register extends React.Component {
                               name="email"
                               placeholder="Email"
                               type="email"
-                              value={this.state.email}
-                              onChange={this.handleChange}
+                              value={state.email}
+                              onChange={handleChange}
                               required
                             />
                           </InputGroup>
@@ -172,8 +186,8 @@ class Register extends React.Component {
                               type="password"
                               name="password"
                               autoComplete="off"
-                              value={this.state.password}
-                              onChange={this.handleChange}
+                              value={state.password}
+                              onChange={handleChange}
                               required
                             />
                           </InputGroup>
@@ -183,8 +197,8 @@ class Register extends React.Component {
                             type="select"
                             name="country"
                             id="country"
-                            value={this.state.country}
-                            onChange={this.handleChange}
+                            value={state.country}
+                            onChange={handleChange}
                             required
                           >
                             <option value="">Select country</option>
@@ -200,7 +214,7 @@ class Register extends React.Component {
                           <Button
                             className="mt-4"
                             color="primary"
-                            type="submit"
+                            onClick={handleSubmit}
                           >
                             Create account
                           </Button>
@@ -216,7 +230,6 @@ class Register extends React.Component {
         <SimpleFooter />
       </>
     );
-  }
 }
 
 export default Register;
