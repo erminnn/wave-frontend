@@ -12,28 +12,30 @@ import {
 
 class TalentFilter extends Component {
   state = {
-    gender: "default",
-    voice_age: "default",
-    language: "default",
+    intonations: "",
+    voiceTypes: "",
+    languages: "",
   };
+
   handleChange = async (dispatch, event) => {
-    await this.setState({ [event.target.name]: event.target.value });
-    await dispatch({
-      type: "UPDATE_FILTER",
-      payload: this.state,
+    await this.setState({
+      [event.target.name]: event.target.value,
     });
 
-    await dispatch({
+    dispatch({
       type: "FILTER_TALENTS",
+      payload: this.state,
     });
   };
+
   onClearAllFilters = () => {
     document
       .querySelectorAll("input[type=radio]")
       .forEach((el) => (el.checked = false));
     document.querySelector("#defaultOption").selected = true;
-    this.setState({ gender: "", voice_age: "", language: "" });
+    this.setState({ intonations: "", voiceTypes: "", languages: "" });
   };
+
   render() {
     return (
       <Consumer>
@@ -53,10 +55,10 @@ class TalentFilter extends Component {
                       <div className="custom-control custom-radio mb-3">
                         <input
                           className="custom-control-input"
-                          name="gender"
+                          name="voiceTypes"
                           id="genderMale"
                           type="radio"
-                          value="Male"
+                          value="MAN"
                           onChange={this.handleChange.bind(this, dispatch)}
                         />
                         <label
@@ -69,10 +71,10 @@ class TalentFilter extends Component {
                       <div className="custom-control custom-radio mb-3">
                         <input
                           className="custom-control-input"
-                          name="gender"
+                          name="voiceTypes"
                           id="genderFemale"
                           type="radio"
-                          value="Female"
+                          value="FEMALE"
                           onChange={this.handleChange.bind(this, dispatch)}
                         />
                         <label
@@ -85,10 +87,10 @@ class TalentFilter extends Component {
                       <div className="custom-control custom-radio mb-3">
                         <input
                           className="custom-control-input"
-                          name="gender"
+                          name="voiceTypes"
                           id="genderBoth"
                           type="radio"
-                          value="Both"
+                          value="BOTH"
                           onChange={this.handleChange.bind(this, dispatch)}
                         />
                         <label
@@ -110,10 +112,10 @@ class TalentFilter extends Component {
                       <div className="custom-control custom-radio mb-3">
                         <input
                           className="custom-control-input"
-                          name="voice_age"
+                          name="intonations"
                           id="voiceAgeChild"
                           type="radio"
-                          value="Child"
+                          value="CHILDREN"
                           onChange={this.handleChange.bind(this, dispatch)}
                         />
                         <label
@@ -126,10 +128,10 @@ class TalentFilter extends Component {
                       <div className="custom-control custom-radio mb-3">
                         <input
                           className="custom-control-input"
-                          name="voice_age"
+                          name="intonations"
                           id="voiceAgeTeen"
                           type="radio"
-                          value="Teen"
+                          value="TEEN"
                           onChange={this.handleChange.bind(this, dispatch)}
                         />
                         <label
@@ -139,29 +141,14 @@ class TalentFilter extends Component {
                           <span>Teen (13-17)</span>
                         </label>
                       </div>
+
                       <div className="custom-control custom-radio mb-3">
                         <input
                           className="custom-control-input"
-                          name="voice_age"
-                          id="voiceAgeYoungAdult"
-                          type="radio"
-                          value="Young Adult"
-                          onChange={this.handleChange.bind(this, dispatch)}
-                        />
-                        <label
-                          className="custom-control-label"
-                          htmlFor="voiceAgeYoungAdult"
-                        >
-                          <span>Young Adult (17-34)</span>
-                        </label>
-                      </div>
-                      <div className="custom-control custom-radio mb-3">
-                        <input
-                          className="custom-control-input"
-                          name="voice_age"
+                          name="intonations"
                           id="voiceAgeMiddleAged"
                           type="radio"
-                          value="Middle Aged"
+                          value="MIDDLE_AGE"
                           onChange={this.handleChange.bind(this, dispatch)}
                         />
                         <label
@@ -174,10 +161,10 @@ class TalentFilter extends Component {
                       <div className="custom-control custom-radio mb-3">
                         <input
                           className="custom-control-input"
-                          name="voice_age"
+                          name="intonations"
                           id="voiceAgeSenior"
                           type="radio"
-                          value="Senior"
+                          value="OLD"
                           onChange={this.handleChange.bind(this, dispatch)}
                         />
                         <label

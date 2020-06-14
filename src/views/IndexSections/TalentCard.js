@@ -25,7 +25,6 @@ class TalentCard extends Component {
       voice_sample_url,
       user_img,
     } = this.props.talent;
-    console.log(languages);
 
     return (
       <Container>
@@ -51,11 +50,11 @@ class TalentCard extends Component {
               </small>
               <small className="d-block text-primary text-center mb-2">
                 <i className="fa fa-globe" aria-hidden="true"></i>
-                {languages.map((language) => " " + language.name + " ")}
+                {languages.map((language) => " " + language + " ")}
               </small>
               <small className="d-block text-primary text-center mb-2">
                 <i className="fa fa-microphone" aria-hidden="true"></i>
-                {intonations.map((intonation) => " " + intonation.type + " ")}
+                {intonations.map((intonation) => " " + intonation + " ")}
               </small>
             </Col>
             <Col className="mt-4 mt-md-0" lg="3" sm="6">
