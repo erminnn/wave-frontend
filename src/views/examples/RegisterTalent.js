@@ -3,6 +3,8 @@ import axios from "axios";
 import DemoNavbar from "components/Navbars/DemoNavbar.js";
 import SimpleFooter from "components/Footers/SimpleFooter.js";
 import { useHistory } from "react-router-dom";
+
+//ermin
 import {
   Button,
   Card,
@@ -218,6 +220,7 @@ class RegisterTalent extends Component {
                       <div className="text-muted text-center mb-3">
                         <h1>Sign up</h1>
                       </div>
+
                       <div className="text-center"></div>
                     </CardHeader>
                     <CardBody className="px-lg-5 py-lg-5">
