@@ -17,15 +17,18 @@ class TalentFilter extends Component {
     languages: "",
   };
 
-  handleChange = async (dispatch, event) => {
-    await this.setState({
-      [event.target.name]: event.target.value,
-    });
-
-    dispatch({
-      type: "FILTER_TALENTS",
-      payload: this.state,
-    });
+  handleChange = (dispatch, event) => {
+    this.setState(
+      {
+        [event.target.name]: event.target.value,
+      },
+      () => {
+        return dispatch({
+          type: "FILTER_TALENTS",
+          payload: this.state,
+        });
+      }
+    );
   };
 
   onClearAllFilters = () => {
@@ -186,7 +189,7 @@ class TalentFilter extends Component {
                       <FormGroup>
                         <Input
                           type="select"
-                          name="language"
+                          name="languages"
                           id="language"
                           onChange={this.handleChange.bind(this, dispatch)}
                           required

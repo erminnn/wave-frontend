@@ -56,14 +56,39 @@ const reducer = async (state, action) => {
           ) {
             filteredTalents.push(talent);
           }
+        } else if (
+          intonations === "" &&
+          voiceTypes !== "" &&
+          languages !== ""
+        ) {
+          if (
+            talent.voiceTypes.includes(`${voiceTypes}`) &&
+            talent.languages.includes(`${languages}`)
+          ) {
+            filteredTalents.push(talent);
+          }
+        } else if (
+          intonations === "" &&
+          voiceTypes === "" &&
+          languages !== ""
+        ) {
+          if (talent.languages.includes(`${languages}`)) {
+            filteredTalents.push(talent);
+          }
+        } else if (
+          intonations === "" &&
+          voiceTypes !== "" &&
+          languages === ""
+        ) {
+          if (talent.voiceTypes.includes(`${voiceTypes}`)) {
+            filteredTalents.push(talent);
+          }
         }
       });
-
       console.log(filteredTalents);
-
       return {
         ...state,
-        talents: filteredTalents,
+        talents: await filteredTalents,
       };
     default:
       return state;
@@ -141,7 +166,8 @@ export class Provider extends Component {
   state = {
     talents: [],
     dispatch: async (action) => {
-      await this.setState((state) => reducer(state, action));
+      const newState = await reducer(this.state, action);
+      this.setState(newState);
     },
   };
 
