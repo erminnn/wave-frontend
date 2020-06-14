@@ -22,16 +22,18 @@ import axios from "axios";
 import {useHistory} from "react-router-dom";
 
 function Register () {
-  const [state, setState] = useState( {
+  const initialState = {
     username: "",
     firstname: "",
     lastname: "",
     email: "",
     password: "",
     country: "",
-  });
+  };
+  const [state, setState] = useState(initialState);
+  const [successMsg, setSuccessMsg] = useState("");
 
-  let ref = useRef("main")
+  let ref = useRef("main");
   let history = useHistory();
 
  /* componentDidMount() {
@@ -63,15 +65,15 @@ function Register () {
     try {
       let response = await axios.post('http://localhost:8080/api/users', getData());
       console.log(response)
-      history.push("/");
-      document.getElementsByClassName('modal').className = "modal fade show";
-
+      setState(initialState)
+      setSuccessMsg("You have registered successfully!");
     } catch (e) {
       console.error(e);
     }
   };
 
   const handleChange = e => {
+    setSuccessMsg("");
     const { name, value } = e.target;
     setState(prevState => ({
       ...prevState,
@@ -102,7 +104,7 @@ function Register () {
                       <div className="text-muted text-center mb-3">
                         <h1>Sign up</h1>
                       </div>
-                      <div className="text-center"></div>
+                      <h4 className="text-success text-center"> {successMsg}</h4>
                     </CardHeader>
                     <CardBody className="px-lg-5 py-lg-5">
                       <Form role="form">
