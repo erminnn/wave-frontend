@@ -98,21 +98,13 @@ const reducer = async (state, action) => {
 const fetchTalents = async () => {
   const talents = [];
   const token = localStorage.getItem("token");
-  const headers = {
-    Authorization: `Bearer ${token}`,
-  };
 
-  const res = await axios.get("http://localhost:8080/api/talents", {
-    headers,
-  });
+  const res = await axios.get("http://localhost:8080/api/talents");
 
   const responseTalents = res.data._embedded.talents;
   for (let i = 0; i < responseTalents.length; i++) {
     const responseIntonations = await axios.get(
-      `${responseTalents[i]._links.intonations.href}`,
-      {
-        headers,
-      }
+      `${responseTalents[i]._links.intonations.href}`
     );
     const intonations = responseIntonations.data._embedded.intonations;
     const intonationsArray = [];
@@ -121,10 +113,7 @@ const fetchTalents = async () => {
     });
 
     const responseLanguage = await axios.get(
-      `${responseTalents[i]._links.languagesSpoken.href}`,
-      {
-        headers,
-      }
+      `${responseTalents[i]._links.languagesSpoken.href}`
     );
 
     const languages = responseLanguage.data._embedded.languages;
@@ -134,10 +123,7 @@ const fetchTalents = async () => {
     });
 
     const responseVoiceType = await axios.get(
-      `${responseTalents[i]._links.voiceTypes.href}`,
-      {
-        headers,
-      }
+      `${responseTalents[i]._links.voiceTypes.href}`
     );
     const voiceTypes = responseVoiceType.data._embedded.voiceTypes;
     const voiceTypesArray = [];
@@ -172,11 +158,10 @@ export class Provider extends Component {
   };
 
   async componentDidMount() {
+    console.log("DAA");
+
     const talents = await fetchTalents();
     this.setState({ ...this.state, talents: talents });
-  }
-  componentDidUpdate() {
-    console.log(this.state);
   }
 
   render() {
